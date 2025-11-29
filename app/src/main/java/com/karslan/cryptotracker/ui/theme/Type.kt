@@ -57,5 +57,10 @@ val Typography = Typography(
         fontFamily = SpaceMono,
         fontWeight = FontWeight.Bold,
         fontSize = 18.sp
+    ),
+    headlineLarge = TextStyle(
+        fontFamily = SpaceMono,
+        fontWeight = FontWeight.Bold,
+        fontSize = 20.sp
     )
 )
