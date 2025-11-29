@@ -1,4 +1,4 @@
-package com.karslan.cryptotracker.util
+package com.karslan.cryptotracker.core.presentation.util
 
 import com.karslan.cryptotracker.R
 

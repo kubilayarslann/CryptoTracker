@@ -47,10 +47,8 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            debug {
-                buildConfigField("String", "BASE_URL", "\"https://api.coincap.io/v3/\"")
-                buildConfigField("String", "API_KEY", "\"${localProperties.getProperty("API_KEY", "")}\"")
-            }
+            buildConfigField("String", "BASE_URL", "\"https://api.coincap.io/v3/\"")
+            buildConfigField("String", "API_KEY", "\"${localProperties.getProperty("API_KEY", "")}\"")
         }
     }
     compileOptions {
