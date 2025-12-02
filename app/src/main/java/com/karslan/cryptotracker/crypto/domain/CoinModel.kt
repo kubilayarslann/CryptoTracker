@@ -7,5 +7,5 @@ data class CoinModel(
     val symbol : String,
     val marketCapUsd : Double,
     val priceUsd : Double,
-    val changePercentage24Hr : Double,
+    val changePercent24Hr : Double,
 )

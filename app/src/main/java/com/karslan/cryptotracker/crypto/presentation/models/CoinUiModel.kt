@@ -13,7 +13,7 @@ data class CoinUiModel(
     val symbol : String,
     val marketCapUsd : DisplayableNumber,
     val priceUsd : DisplayableNumber,
-    val changePercentage24Hr : DisplayableNumber,
+    val changePercent24Hr : DisplayableNumber,
     @param:DrawableRes val iconRes: Int
 )
 
@@ -31,7 +31,7 @@ fun CoinModel.toCoinUiModel () : CoinUiModel {
         symbol = this.symbol,
         priceUsd = this.priceUsd.toDisplayableNumber(),
         marketCapUsd = this.marketCapUsd.toDisplayableNumber(),
-        changePercentage24Hr = this.changePercentage24Hr.toDisplayableNumber(),
+        changePercent24Hr = this.changePercent24Hr.toDisplayableNumber(),
         iconRes = getDrawableIdForCoin(this.symbol)
     )
 }

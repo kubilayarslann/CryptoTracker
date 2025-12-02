@@ -35,10 +35,17 @@ android {
     }
 
     buildTypes {
-
         debug {
-            buildConfigField("String", "BASE_URL", "\"https://api.coincap.io/v3/\"")
-            buildConfigField("String", "API_KEY", "\"${localProperties.getProperty("API_KEY", "")}\"")
+            buildConfigField(
+                "String",
+                "BASE_URL",
+                "\"https://rest.coincap.io/v3/\""
+            )
+            buildConfigField(
+                "String",
+                "API_KEY",
+                "\"${localProperties.getProperty("API_KEY", "")}\""
+            )
         }
 
         release {
@@ -47,10 +54,19 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField("String", "BASE_URL", "\"https://api.coincap.io/v3/\"")
-            buildConfigField("String", "API_KEY", "\"${localProperties.getProperty("API_KEY", "")}\"")
+            buildConfigField(
+                "String",
+                "BASE_URL",
+                "\"https://rest.coincap.io/v3/\""
+            )
+            buildConfigField(
+                "String",
+                "API_KEY",
+                "\"${localProperties.getProperty("API_KEY", "")}\""
+            )
         }
     }
+
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
