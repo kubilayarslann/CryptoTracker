@@ -2,17 +2,14 @@ package com.karslan.cryptotracker.core.data.network
 
 import com.karslan.cryptotracker.BuildConfig
 import com.karslan.cryptotracker.core.domain.util.CryptoTrackerResult
-import com.karslan.cryptotracker.core.domain.util.NetworkCryptoTrackerError
-import com.plcoding.cryptotracker.util.CryptoTrackerError
+import com.karslan.cryptotracker.core.domain.util.NetworkCryptoTrackerNetworkError
 import io.ktor.client.call.NoTransformationFoundException
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 import io.ktor.util.network.UnresolvedAddressException
 import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.ensureActive
-import kotlinx.coroutines.isActive
 import kotlinx.serialization.SerializationException
-import kotlin.coroutines.coroutineContext
 
 fun constructUrl(url: String): String {
     return when {
@@ -24,35 +21,35 @@ fun constructUrl(url: String): String {
 
 suspend inline fun <reified T> responseToCryptoTrackerResult (
     response: HttpResponse
-): CryptoTrackerResult<T, NetworkCryptoTrackerError> {
+): CryptoTrackerResult<T, NetworkCryptoTrackerNetworkError> {
     return when(response.status.value) {
         in 200..299 -> {
             try {
                 CryptoTrackerResult.Success(response.body<T>())
             } catch (e: NoTransformationFoundException) {
-                CryptoTrackerResult.Error(NetworkCryptoTrackerError.SERIALIZATION)
+                CryptoTrackerResult.Error(NetworkCryptoTrackerNetworkError.SERIALIZATION)
             }
         }
-        408 -> CryptoTrackerResult.Error(NetworkCryptoTrackerError.REQUEST_TIMEOUT)
-        429 -> CryptoTrackerResult.Error(NetworkCryptoTrackerError.TOO_MANY_REQUESTS)
+        408 -> CryptoTrackerResult.Error(NetworkCryptoTrackerNetworkError.REQUEST_TIMEOUT)
+        429 -> CryptoTrackerResult.Error(NetworkCryptoTrackerNetworkError.TOO_MANY_REQUESTS)
 
-        in 500..599 -> CryptoTrackerResult.Error(NetworkCryptoTrackerError.SERVER_ERROR)
-        else -> CryptoTrackerResult.Error(NetworkCryptoTrackerError.UNKNOWN)
+        in 500..599 -> CryptoTrackerResult.Error(NetworkCryptoTrackerNetworkError.SERVER_ERROR)
+        else -> CryptoTrackerResult.Error(NetworkCryptoTrackerNetworkError.UNKNOWN)
     }
 }
 
 suspend inline fun <reified T> safeCall(
     execute: () -> HttpResponse
-): CryptoTrackerResult<T, NetworkCryptoTrackerError> {
+): CryptoTrackerResult<T, NetworkCryptoTrackerNetworkError> {
     val response = try {
         execute()
     } catch (e: UnresolvedAddressException) {
-        return CryptoTrackerResult.Error(NetworkCryptoTrackerError.NO_INTERNET)
+        return CryptoTrackerResult.Error(NetworkCryptoTrackerNetworkError.NO_INTERNET)
     }catch (e: SerializationException) {
-        return CryptoTrackerResult.Error(NetworkCryptoTrackerError.SERIALIZATION)
+        return CryptoTrackerResult.Error(NetworkCryptoTrackerNetworkError.SERIALIZATION)
     } catch (e: Exception) {
         currentCoroutineContext().ensureActive()
-        return CryptoTrackerResult.Error(NetworkCryptoTrackerError.UNKNOWN)
+        return CryptoTrackerResult.Error(NetworkCryptoTrackerNetworkError.UNKNOWN)
     }
 
     return responseToCryptoTrackerResult(response)

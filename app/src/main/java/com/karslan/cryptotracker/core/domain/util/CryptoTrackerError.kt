@@ -1,3 +1,3 @@
-package com.plcoding.cryptotracker.util
+package com.karslan.cryptotracker.core.domain.util
 
 interface CryptoTrackerError

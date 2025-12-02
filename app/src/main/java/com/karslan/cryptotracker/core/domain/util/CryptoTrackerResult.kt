@@ -1,7 +1,5 @@
 package com.karslan.cryptotracker.core.domain.util
 
-import com.plcoding.cryptotracker.util.CryptoTrackerError
-
 typealias DomainError = CryptoTrackerError
 
 sealed interface CryptoTrackerResult<out D, out E: CryptoTrackerError> {
