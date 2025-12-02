@@ -1,4 +1,4 @@
-package com.karslan.cryptotracker.crypto.presentation.coin_list.components
+package com.karslan.cryptotracker.crypto.presentation.coin_list
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -15,7 +15,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import com.karslan.cryptotracker.crypto.presentation.coin_list.CoinListState
+import com.karslan.cryptotracker.crypto.presentation.coin_list.components.CoinListItem
+import com.karslan.cryptotracker.crypto.presentation.coin_list.components.previewCoinUiModel
 import com.karslan.cryptotracker.ui.theme.CryptoTrackerTheme
 
 @Composable
