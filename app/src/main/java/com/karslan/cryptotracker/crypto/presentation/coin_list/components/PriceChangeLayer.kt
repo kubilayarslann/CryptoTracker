@@ -31,7 +31,7 @@ fun PriceChangeLayer(
     val backgroundColor = if (change.value < 0.0) {
         MaterialTheme.colorScheme.errorContainer
     } else {
-        Color.Green
+        Color(0xFF007F00)
     }
 
     Row(
