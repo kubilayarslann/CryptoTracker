@@ -3,7 +3,7 @@ package com.karslan.cryptotracker.crypto.data.network
 import com.karslan.cryptotracker.core.data.network.constructUrl
 import com.karslan.cryptotracker.core.data.network.safeCall
 import com.karslan.cryptotracker.core.domain.util.CryptoTrackerResult
-import com.karslan.cryptotracker.core.domain.util.NetworkCryptoTrackerNetworkError
+import com.karslan.cryptotracker.core.domain.util.CryptoTrackerNetworkError
 import com.karslan.cryptotracker.core.domain.util.map
 import com.karslan.cryptotracker.crypto.data.mappers.toCoinModel
 import com.karslan.cryptotracker.crypto.data.network.dto.CoinsResponseDto
@@ -16,7 +16,7 @@ class RemoteCoinDataSource(
     private val httpClient: HttpClient
 ): CoinDataSource {
 
-    override suspend fun getCoins(): CryptoTrackerResult<List<CoinModel>, NetworkCryptoTrackerNetworkError> {
+    override suspend fun getCoins(): CryptoTrackerResult<List<CoinModel>, CryptoTrackerNetworkError> {
         return safeCall<CoinsResponseDto> {
                     httpClient.get(
                         urlString = constructUrl(url ="/assets")
