@@ -15,6 +15,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.karslan.cryptotracker.core.domain.util.CryptoTrackerNetworkError
 import com.karslan.cryptotracker.core.presentation.util.ObserveAsEvents
 import com.karslan.cryptotracker.core.presentation.util.toString
+import com.karslan.cryptotracker.crypto.presentation.coin_detail.CoinDetailScreen
 import com.karslan.cryptotracker.crypto.presentation.coin_list.CoinListEvents
 import com.karslan.cryptotracker.crypto.presentation.coin_list.CoinListScreen
 import com.karslan.cryptotracker.crypto.presentation.coin_list.CoinListViewModel
@@ -43,10 +44,21 @@ class MainActivity : ComponentActivity() {
                         }
                     }
 
-                    CoinListScreen(
-                        modifier = Modifier.padding(innerPadding),
-                        state = state
-                    )
+                    when {
+                        state.selectedCoin != null -> {
+                            CoinDetailScreen(
+                                modifier = Modifier.padding(innerPadding),
+                                state = state
+                            )
+                        }
+                        else -> {
+                            CoinListScreen(
+                                modifier = Modifier.padding(innerPadding),
+                                state = state,
+                                onAction = viewModel::onActions
+                            )
+                        }
+                    }
 
                 }
             }
